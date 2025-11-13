@@ -22,7 +22,7 @@ const ReviewCard = ({ review }) => {
   
     const addFavoriteMutation = useMutation({
         mutationFn: (newFavorite) => {
-            return axios.post('http://localhost:5001/favorites', newFavorite);
+            return axios.post('https://local-food-lover-network.vercel.app/favorites', newFavorite);
         },
         onSuccess: () => {
             toast.success('Added to Favorites!');
@@ -90,7 +90,7 @@ const AllReviews = () => {
         queryKey: ['reviews', searchTerm], 
         queryFn: async () => {
             
-            const res = await axios.get(`http://localhost:5001/reviews?searchParams=${searchTerm}`);
+            const res = await axios.get(`https://local-food-lover-network.vercel.app/reviews?searchParams=${searchTerm}`);
             return res.data;
         }
     });

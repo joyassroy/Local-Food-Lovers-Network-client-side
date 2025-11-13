@@ -19,7 +19,7 @@ const MyFavorites = () => {
     const { data: favorites = [], isLoading } = useQuery({
         queryKey: ['myFavorites', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5001/my-favorites/${user.email}`);
+            const res = await axios.get(`https://local-food-lover-network.vercel.app/my-favorites/${user.email}`);
             return res.data;
         },
         enabled: !!user?.email,
@@ -28,7 +28,7 @@ const MyFavorites = () => {
     
     const deleteMutation = useMutation({
         mutationFn: (id) => {
-            return axios.delete(`http://localhost:5001/favorite/${id}`);
+            return axios.delete(`https://local-food-lover-network.vercel.app/favorite/${id}`);
         },
         onSuccess: () => {
             toast.success('Removed from Favorites');

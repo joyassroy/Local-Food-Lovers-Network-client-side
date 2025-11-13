@@ -20,7 +20,7 @@ const MyReviews = () => {
     const { data: reviews = [], isLoading, error } = useQuery({
         queryKey: ['myReviews', user?.email], 
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5001/my-reviews/${user.email}`);
+            const res = await axios.get(`https://local-food-lover-network.vercel.app/my-reviews/${user.email}`);
             return res.data;
         },
         enabled: !!user?.email, 
@@ -29,7 +29,7 @@ const MyReviews = () => {
 
     const deleteMutation = useMutation({
         mutationFn: (id) => {
-            return axios.delete(`http://localhost:5001/review/${id}`);
+            return axios.delete(`https://local-food-lover-network.vercel.app/review/${id}`);
         },
         onSuccess: () => {
             toast.success('Review Deleted');

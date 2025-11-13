@@ -18,7 +18,7 @@ const ReviewDetails = () => {
     const { data: review, isLoading } = useQuery({
         queryKey: ['review', id], 
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5001/review/${id}`);
+            const res = await axios.get(`https://local-food-lover-network.vercel.app/review/${id}`);
             return res.data;
         }
     });

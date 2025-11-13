@@ -68,7 +68,7 @@ const FeaturedReviews = () => {
         queryKey: ['featuredReviews'],
         queryFn: async () => {
 
-            const res = await axios.get('http://localhost:5001/reviews?limit=6');
+            const res = await axios.get('https://local-food-lover-network.vercel.app/reviews?limit=6');
             return res.data;
         }
     });

@@ -22,7 +22,7 @@ const UpdateReview = () => {
     const { data: reviewData, isLoading } = useQuery({
         queryKey: ['review', id],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5001/review/${id}`);
+            const res = await axios.get(`https://local-food-lover-network.vercel.app/review/${id}`);
             reset(res.data); 
             return res.data;
         }
@@ -31,7 +31,7 @@ const UpdateReview = () => {
   
     const mutation = useMutation({
         mutationFn: (updatedReview) => {
-            return axios.patch(`http://localhost:5001/review/${id}`, updatedReview);
+            return axios.patch(`https://local-food-lover-network.vercel.app/review/${id}`, updatedReview);
         },
         onSuccess: () => {
             toast.success('Review Updated Successfully!');
