@@ -1,51 +1,51 @@
-import React, { useState, useContext } from 'react'; // Import useContext
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; // Import mutation hooks
+import React, { useState, useContext } from 'react'; 
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; 
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthProvider'; // Import AuthContext
-import toast from 'react-hot-toast'; // Import toast
+import { AuthContext } from '../contexts/AuthProvider'; 
+import toast from 'react-hot-toast'; 
 
-// Simple Loading Spinner
+
 const LoadingSpinner = () => (
     <div className="flex justify-center items-center min-h-[50vh]">
         <span className="loading loading-spinner loading-lg"></span>
     </div>
 );
 
-// --- Review Card Component (UPDATED) ---
+
 const ReviewCard = ({ review }) => {
     const { _id, foodName, foodImage, restaurantName, location, rating, reviewText } = review;
-    const { user } = useContext(AuthContext); // Get the logged-in user
+    const { user } = useContext(AuthContext); 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    // Create a mutation for adding to favorites
+  
     const addFavoriteMutation = useMutation({
         mutationFn: (newFavorite) => {
             return axios.post('http://localhost:5001/favorites', newFavorite);
         },
         onSuccess: () => {
             toast.success('Added to Favorites!');
-            queryClient.invalidateQueries(['myFavorites']); // Update favorites list
+            queryClient.invalidateQueries(['myFavorites']); 
         },
         onError: (error) => {
-            // Handle error (e.g., if already favorited)
+            
             toast.error(error.response?.data?.message || "Could not add to favorites.");
         }
     });
 
     const handleFavorite = () => {
         if (!user) {
-            // If user is not logged in, redirect to login page
+
             toast.error("You must be logged in to add favorites.");
             return navigate('/login');
         }
 
-        // Create the favorite object to send to the DB [cite: 105]
+
         const favoriteData = {
-            reviewId: _id, // The ID of the review itself
+            reviewId: _id, 
             userEmail: user.email,
-            // Copy the review details
+           
             foodName,
             foodImage,
             restaurantName,
@@ -70,7 +70,7 @@ const ReviewCard = ({ review }) => {
                             className="btn btn-ghost btn-sm btn-circle mr-2"
                             disabled={addFavoriteMutation.isLoading}
                         >
-                            ❤️ {/* Favorite Button  */}
+                            ❤️ 
                         </button>
                         <Link to={`/review/${_id}`} className="btn btn-primary btn-sm">View Details</Link>
                     </div>
@@ -81,15 +81,15 @@ const ReviewCard = ({ review }) => {
 };
 
 
-// --- AllReviews Page Component (No Change) ---
+
 const AllReviews = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Fetch data using TanStack Query
+
     const { data: reviews = [], isLoading } = useQuery({
-        queryKey: ['reviews', searchTerm], // Re-fetch when searchTerm changes
+        queryKey: ['reviews', searchTerm], 
         queryFn: async () => {
-            // Use server-side search [cite: 110]
+            
             const res = await axios.get(`http://localhost:5001/reviews?searchParams=${searchTerm}`);
             return res.data;
         }
@@ -102,14 +102,14 @@ const AllReviews = () => {
     }
  
     if (isLoading) {
-        return <LoadingSpinner />; // Show spinner while loading [cite: 99]
+        return <LoadingSpinner />; 
     }
 
     return (
         <div className="container mx-auto px-4 py-12">
             <h1 className="text-4xl font-bold text-center mb-10">All Food Reviews</h1>
             
-            {/* Search Bar [cite: 109] */}
+          
             <form onSubmit={handleSearch} className="flex justify-center mb-10">
                 <div className="form-control">
                     <div className="input-group">
@@ -121,7 +121,7 @@ const AllReviews = () => {
                 </div>
             </form>
 
-            {/* Reviews Grid [cite: 90] */}
+           
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {reviews.map(review => (
                     <ReviewCard key={review._id} review={review} />

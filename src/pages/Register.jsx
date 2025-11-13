@@ -32,16 +32,16 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
-                // Update profile
+               
                 updateUserProfile(name, photo)
                     .then(() => {
-                        // We don't show success toast, just redirect [cite: 68]
+
                         navigate('/'); 
                     })
                     .catch(error => toast.error(error.message));
             })
             .catch(error => {
-                toast.error(error.message); // [cite: 67]
+                toast.error(error.message); 
             });
     }
 

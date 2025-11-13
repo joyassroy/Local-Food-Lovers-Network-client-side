@@ -46,27 +46,27 @@ const ReviewDetails = () => {
     return (
         <div className="container mx-auto px-4 py-16">
             <div className="max-w-4xl mx-auto bg-base-100 shadow-2xl rounded-lg overflow-hidden">
-                {/* Food Image */}
+            
                 <img src={foodImage} alt={foodName} className="w-full h-96 object-cover" />
                 
                 <div className="p-8 md:p-12">
-                    {/* Food Name */}
+                   
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">{foodName}</h1>
                     
-                    {/* Restaurant & Location */}
+                    
                     <p className="text-2xl font-semibold text-primary mb-2">
                         {restaurantName}
                     </p>
                     <p className="text-lg text-gray-600 mb-6">{location}</p>
                     
-                    {/* Rating */}
+                    
                     <div className="mb-6">
                         <span className="text-3xl font-bold text-yellow-500">
                             ★ {rating} / 5
                         </span>
                     </div>
 
-                    {/* Full Review Text */}
+                   
                     <h3 className="text-xl font-semibold mb-2">Full Review:</h3>
                     <p className="text-base text-gray-700 leading-relaxed mb-8">
                         {reviewText}
@@ -74,7 +74,7 @@ const ReviewDetails = () => {
 
                     <div className="divider"></div>
 
-                    {/* Reviewer Info */}
+                
                     <div className="flex items-center space-x-4">
                         <div className="avatar">
                             <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">

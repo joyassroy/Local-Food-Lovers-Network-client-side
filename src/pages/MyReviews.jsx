@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-// Simple Loading Spinner
+
 const LoadingSpinner = () => (
     <div className="flex justify-center items-center min-h-[50vh]">
         <span className="loading loading-spinner loading-lg"></span>
@@ -16,31 +16,31 @@ const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
 
-    // Fetch *only* the logged-in user's reviews
+   
     const { data: reviews = [], isLoading, error } = useQuery({
-        queryKey: ['myReviews', user?.email], // Depends on user.email
+        queryKey: ['myReviews', user?.email], 
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5001/my-reviews/${user.email}`);
             return res.data;
         },
-        enabled: !!user?.email, // Only run the query if the user's email is available
+        enabled: !!user?.email, 
     });
 
-    // Mutation for Deleting a review
+
     const deleteMutation = useMutation({
         mutationFn: (id) => {
             return axios.delete(`http://localhost:5001/review/${id}`);
         },
         onSuccess: () => {
             toast.success('Review Deleted');
-            // Re-fetch the 'myReviews' query to update the table
+
             queryClient.invalidateQueries(['myReviews']); 
         }
     });
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this review?")) {
-            deleteMutation.mutate(id); // [cite: 95]
+            deleteMutation.mutate(id); 
         }
     };
 
@@ -53,7 +53,7 @@ const MyReviews = () => {
             
             <div className="overflow-x-auto">
                 <table className="table w-full">
-                    {/* Head - [cite: 93] */}
+
                     <thead>
                         <tr>
                             <th>Food Image</th>
@@ -77,12 +77,12 @@ const MyReviews = () => {
                                 <td>{review.restaurantName}</td>
                                 <td>{new Date(review.createdAt).toLocaleDateString()}</td>
                                 <td>
-                                    {/* Edit Button [cite: 96] */}
+                                    
                                     <Link to={`/update-review/${review._id}`} className="btn btn-ghost btn-sm">
                                         Edit
                                     </Link>
                                     
-                                    {/* Delete Button [cite: 94] */}
+                                    
                                     <button 
                                         onClick={() => handleDelete(review._id)} 
                                         className="btn btn-error btn-sm text-white"

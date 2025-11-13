@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query'; // Import useQuery
-import axios from 'axios'; // Import axios
+import { useQuery } from '@tanstack/react-query'; 
+import axios from 'axios'; 
 
-// --- Hero Slider (No Change) ---
+
 const HeroSlider = () => (
     <div className="carousel w-full h-[600px] rounded-lg">
-        {/* Slide 1 */}
+        
         <div id="slide1" className="carousel-item relative w-full">
             <img src="https://i.ibb.co.com/XZh6z2N4/a101.jpg" alt="Slide 1" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
@@ -23,7 +23,7 @@ const HeroSlider = () => (
                 <a href="#slide2" className="btn btn-circle">❯</a>
             </div>
         </div>
-        {/* Slide 2 */}
+       
         <div id="slide2" className="carousel-item relative w-full">
             <img src="https://i.ibb.co.com/2YLHbMYp/a102.jpg" alt="Slide 2" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
@@ -40,7 +40,7 @@ const HeroSlider = () => (
                 <a href="#slide3" className="btn btn-circle">❯</a>
             </div>
         </div>
-        {/* Slide 3 */}
+       
         <div id="slide3" className="carousel-item relative w-full">
             <img src="https://i.ibb.co.com/VYnJhJdM/a1022.jpg" alt="Slide 3" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
@@ -60,14 +60,14 @@ const HeroSlider = () => (
     </div>
 );
 
-// --- Featured Reviews Section (UPDATED) ---
+
 const FeaturedReviews = () => {
     
-    // Fetch 6 reviews from the server [cite: 54]
+
     const { data: reviews = [], isLoading } = useQuery({
         queryKey: ['featuredReviews'],
         queryFn: async () => {
-            // Your server already handles the 'limit' query
+
             const res = await axios.get('http://localhost:5001/reviews?limit=6');
             return res.data;
         }
@@ -80,20 +80,20 @@ const FeaturedReviews = () => {
                 <p className="text-lg text-gray-600">See what's popular among our food lovers</p>
             </div>
             
-            {/* Show loading spinner */}
+          
             {isLoading && (
                 <div className="flex justify-center">
                     <span className="loading loading-spinner loading-lg"></span>
                 </div>
             )}
 
-            {/* Render the fetched reviews */}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {reviews.map(review => (
                     <div key={review._id} className="card card-compact bg-base-100 shadow-xl">
                         <figure><img src={review.foodImage} alt={review.foodName} className="h-60 w-full object-cover" /></figure>
                         <div className="card-body">
-                            {/* Card content based on requirements [cite: 55] */}
+                            
                             <h2 className="card-title">{review.foodName}</h2>
                             <p className="font-semibold">{review.restaurantName} - {review.location}</p>
                             <p>Review by: {review.userName}</p>
@@ -115,7 +115,7 @@ const FeaturedReviews = () => {
     );
 };
 
-// --- How It Works Section (No Change) ---
+
 const HowItWorks = () => (
     <div className="my-24 py-16 bg-base-200 rounded-lg">
          <div className="text-center mb-12">
@@ -141,14 +141,14 @@ const HowItWorks = () => (
     </div>
 );
 
-// --- Main Home Component (No Change) ---
+
 const Home = () => {
     return (
         <div className="container mx-auto px-4">
             <HeroSlider />
             <FeaturedReviews />
             <HowItWorks />
-            {/* Add your 2nd additional section here [cite: 59] */}
+
         </div>
     );
 };

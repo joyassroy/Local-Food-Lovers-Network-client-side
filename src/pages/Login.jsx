@@ -21,7 +21,7 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
             .catch(error => {
-                toast.error(error.message); // [cite: 74]
+                toast.error(error.message);
             });
     }
 
