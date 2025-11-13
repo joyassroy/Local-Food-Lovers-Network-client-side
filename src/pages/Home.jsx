@@ -8,7 +8,7 @@ const HeroSlider = () => (
     <div className="carousel w-full h-[600px] rounded-lg">
         {/* Slide 1 */}
         <div id="slide1" className="carousel-item relative w-full">
-            <img src="https://i.ibb.co/XSbL0Yt/slide1.jpg" alt="Slide 1" className="w-full object-cover" />
+            <img src="https://i.ibb.co.com/XZh6z2N4/a101.jpg" alt="Slide 1" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className="text-white space-y-7 pl-12 w-1/2">
                     <h2 className="text-6xl font-bold">Discover Your Next Favorite Meal</h2>
@@ -25,7 +25,7 @@ const HeroSlider = () => (
         </div>
         {/* Slide 2 */}
         <div id="slide2" className="carousel-item relative w-full">
-            <img src="https://i.ibb.co/3kC0b3S/slide2.jpg" alt="Slide 2" className="w-full object-cover" />
+            <img src="https://i.ibb.co.com/2YLHbMYp/a102.jpg" alt="Slide 2" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className="text-white space-y-7 pl-12 w-1/2">
                     <h2 className="text-6xl font-bold">From Street Food to Fine Dining</h2>
@@ -42,7 +42,7 @@ const HeroSlider = () => (
         </div>
         {/* Slide 3 */}
         <div id="slide3" className="carousel-item relative w-full">
-            <img src="https://i.ibb.co/qjNqD3Q/slide3.jpg" alt="Slide 3" className="w-full object-cover" />
+            <img src="https://i.ibb.co.com/VYnJhJdM/a1022.jpg" alt="Slide 3" className="w-full object-cover" />
             <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className="text-white space-y-7 pl-12 w-1/2">
                     <h2 className="text-6xl font-bold">Join the Community</h2>
