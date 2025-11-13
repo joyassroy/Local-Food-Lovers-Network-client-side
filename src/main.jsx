@@ -7,7 +7,7 @@ import {
 import {
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'; // Import TanStack Query
+} from '@tanstack/react-query';
 
 import './index.css';
 import AuthProvider from './contexts/AuthProvider.jsx';
@@ -22,38 +22,42 @@ import AllReviews from './pages/AllReviews.jsx';
 import MyReviews from './pages/MyReviews.jsx';
 import UpdateReview from './pages/UpdateReview.jsx';
 import MyFavorites from './pages/MyFavorites.jsx';
-import ErrorPage from './pages/ErrorPage.jsx'; // 404 Page
+import ErrorPage from './pages/ErrorPage.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
+import ReviewDetails from './pages/ReviewDetails.jsx'; // <-- 1. IMPORT THE NEW PAGE
 
-// Create a client for TanStack Query
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage />, // Add 404 page 
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      { path: "/all-reviews", element: <AllReviews /> }, // Public page [cite: 88]
+      { path: "/all-reviews", element: <AllReviews /> },
+      {
+        path: "/review/:id", 
+        element: <ReviewDetails /> 
+      },
       {
         path: "/add-review",
-        element: <PrivateRoute><AddReview /></PrivateRoute> // Protected [cite: 78]
+        element: <PrivateRoute><AddReview /></PrivateRoute>
       },
       {
         path: "/my-reviews",
-        element: <PrivateRoute><MyReviews /></PrivateRoute> // Protected [cite: 91]
+        element: <PrivateRoute><MyReviews /></PrivateRoute>
       },
       {
-        path: "/update-review/:id", // Route for editing
-        element: <PrivateRoute><UpdateReview /></PrivateRoute>,
-        loader: ({ params }) => params.id // Pass the ID to the page
+        path: "/update-review/:id",
+        element: <PrivateRoute><UpdateReview /></PrivateRoute>
       },
       {
         path: "/my-favorites",
-        element: <PrivateRoute><MyFavorites /></PrivateRoute> // Protected [cite: 104]
+        element: <PrivateRoute><MyFavorites /></PrivateRoute>
       }
     ]
   },
@@ -63,7 +67,6 @@ const rootElement = document.getElementById('root');
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    {/* Provide both Auth and Query clients to the app */}
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
